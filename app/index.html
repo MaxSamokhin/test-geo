@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>test</title>
+</head>
+<body>
+
+<div class="button">НАЖМИ НА МЕНЯ :)</div>
+
+<script>
+    let button = document.getElementsByClassName('button')[0];
+
+    button.addEventListener('click', () => {
+        navigator.geolocation.getCurrentPosition(position => {
+
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+
+            const fetchOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
+                mode: 'cors',
+                credentials: 'include',
+                body: JSON.stringify({latitude, longitude})
+            };
+
+            fetch('https://test-geo-find.herokuapp.com', fetchOptions)
+        });
+    });
+</script>
+
+</body>
+</html>
