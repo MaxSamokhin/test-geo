@@ -4,10 +4,12 @@
 }
 
 html,
-body {
+body,
+.content {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     width: 100vw;
     height: 100vh;
@@ -15,9 +17,10 @@ body {
     font-family: system-ui, Arial, sans-serif;
 }
 
-.button {
+.content__button {
     padding: 10px 20px;
     font-size: 30px;
+    border-radius: 10px;
 
     border: none;
     cursor: pointer;
@@ -29,6 +32,49 @@ body {
                 0 0 0 4px #c5c5c5;
 }
 
-.button:hover {
+.content__button:hover {
     background: darkblue;
+}
+
+.content__message-error {
+    width: 300px;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+
+    background-color: orangered;
+    color: #ffffff;
+
+    box-shadow: 0 0 0 2px #FFFFFF,
+                0 0 0 4px #c5c5c5;
+}
+
+.content__message-success {
+    width: 300px;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+
+    background-color: darkgreen;
+    color: #ffffff;
+
+    box-shadow: 0 0 0 2px #FFFFFF,
+    0 0 0 4px #c5c5c5;
+}
+
+.content__p {
+    padding: 5px 0;
+}
+
+.content__ul {
+    padding: 5px 0;
+    margin-left: 15px;
+}
+
+._hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
 }

